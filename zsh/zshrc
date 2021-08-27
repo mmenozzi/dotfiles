@@ -1,0 +1,198 @@
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="spaceship"
+DEFAULT_USER=`whoami`
+
+###################################
+# Spaceship Prompt
+###################################
+
+#Xdebug Custom Section ----
+SPACESHIP_XDEBUG_SHOW="true"
+SPACESHIP_XDEBUG_PREFIX="via "
+SPACESHIP_XDEBUG_SUFFIX=""
+SPACESHIP_XDEBUG_SYMBOL="🐞 "
+SPACESHIP_XDEBUG_COLOR="blue"
+
+spaceship_xdebug() {
+  [[ $SPACESHIP_XDEBUG_SHOW == false ]] && return
+
+  # Show only if php files or composer.json exist in current directory
+  [[ -n *.php(#qN^/) || -f composer.json ]] || return
+
+  spaceship::exists php || return
+
+  local xdebug_version=$(php -v 2>&1 | grep --color=never -oe "Xdebug\s*v[0-9.]\+" | awk '{print $2}')
+
+  [[ -z ${xdebug_version} ]] && return
+
+  spaceship::section \
+    "${SPACESHIP_XDEBUG_COLOR}" \
+    "${SPACESHIP_XDEBUG_PREFIX}" \
+    "${SPACESHIP_XDEBUG_SYMBOL}${xdebug_version}" \
+    "${SPACESHIP_XDEBUG_SUFFIX}"
+}
+# -------------------------
+
+SPACESHIP_TIME_SHOW="true"
+SPACESHIP_KUBECONTEXT_SHOW="false"
+SPACESHIP_DOCKER_SHOW="false"
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  hg            # Mercurial section (hg_branch  + hg_status)
+  package       # Package version
+  node          # Node.js section
+  ruby          # Ruby section
+  elixir        # Elixir section
+  xcode         # Xcode section
+  swift         # Swift section
+  golang        # Go section
+  php           # PHP section
+  xdebug        # Xdebug section
+  rust          # Rust section
+  haskell       # Haskell Stack section
+  julia         # Julia section
+  docker        # Docker section
+  aws           # Amazon Web Services section
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  dotnet        # .NET section
+  ember         # Ember.js section
+#  kubecontext   # Kubectl context section
+  terraform     # Terraform workspace section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+###################################
+
+# Example aliases
+alias zshconfig="nano ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias sshkeydump="cat ~/.ssh/id_rsa.pub"
+alias m2_clear_frontend="rm -rf pub/static/frontend/ && rm -rf var/view_preprocessed/css/frontend/ && php bin/magento ca:cl block_html layout"
+alias java_jre="/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java"
+alias diffm2='diff -wbBEr --ignore-matching-lines="* Copyright" --exclude=".git" --exclude="dev" --exclude="setup" --exclude="Test" --exclude="*.txt" --exclude="*.md"'
+alias light='iterm2_profile "Solarized Light"'
+alias dark='iterm2_profile "Solarized Dark"'
+alias zshrc='open ~/.zshrc'
+alias sf='bin/console'
+alias sfstart='docker compose -f docker-compose.dev.yml up -d && symfony proxy:start && symfony serve -d'
+alias sfstop='docker-compose -f docker-compose.dev.yml stop && symfony proxy:stop && symfony server:stop'
+
+# Functions
+
+magerun() {
+    test -f vendor/bin/n98-magerun && vendor/bin/n98-magerun $@ || /usr/local/bin/n98-magerun.phar $@
+}
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git brew docker iterm2 fast-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/mysql/bin:~/.composer/vendor/bin
+export LC_ALL="en_US.UTF-8"
+
+# Aggiunge binari Homebrew al path
+export PATH=/usr/local/sbin:$PATH
+
+# Imposta global come mode iniziale di per-directory-history plugin
+#_per-directory-history-set-global-history && $_per_directory_history_is_global = true
+
+# Include z.sh
+. /usr/local/bin/z.sh
+
+# Aggiunge Cask al PATH
+export PATH="$HOME/.cask/bin:$PATH"
+
+# added by travis gem
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+# Adds Go in PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export GOPATH=$HOME/.go
+
+# iTerm2 Shell Integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export PATH="$HOME/.fastlane/bin:$PATH" # Fastlane (PEM manager)
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+# Magento config override env
+export MAGE_ENVIRONMENT="dev"
+
+# Homebrew Github Api Token
+export HOMEBREW_GITHUB_API_TOKEN="fdaa81cbddd11a79081c70390349e1196cbd0042"
+
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+
+# Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# brew-php-switcher alias
+alias sphp="brew-php-switcher"
+
+# Too many open files fix
+ulimit -S -n 2048
+
+# Python3 bin in PATH
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
