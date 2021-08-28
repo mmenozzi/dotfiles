@@ -158,9 +158,6 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 # Magento config override env
 export MAGE_ENVIRONMENT="dev"
 
-# Homebrew Github Api Token
-export HOMEBREW_GITHUB_API_TOKEN="fdaa81cbddd11a79081c70390349e1196cbd0042"
-
 # NVM (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
