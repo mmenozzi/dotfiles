@@ -193,3 +193,6 @@ ulimit -S -n 2048
 
 # Python3 bin in PATH
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+# Add default key to SSH agent
+ssh-add -kq
