@@ -191,6 +191,9 @@ ulimit -S -n 2048
 # Python3 bin in PATH
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
+# Symfony CLI in PATH
+export PATH="$HOME/.symfony/bin:$PATH"
+
 # Start SSH agent if not running
 if [ -z "$SSH_AUTH_SOCK" ]
 then
