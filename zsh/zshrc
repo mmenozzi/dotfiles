@@ -102,6 +102,10 @@ magerun() {
     test -f vendor/bin/n98-magerun && vendor/bin/n98-magerun $@ || /usr/local/bin/n98-magerun.phar $@
 }
 
+dep() {
+    test -f vendor/bin/dep && vendor/bin/dep $@ || /usr/local/bin/dep6 $@
+}
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
