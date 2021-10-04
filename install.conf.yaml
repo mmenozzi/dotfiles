@@ -8,3 +8,10 @@
     ~/.zshrc:
         path: zsh/zshrc
         force: true
+ 
+    ~/.gitconfig:
+        path: git/gitconfig
+        force: true
+    ~/.gitignore_global:
+        path: git/gitignore_global
+        force: true
