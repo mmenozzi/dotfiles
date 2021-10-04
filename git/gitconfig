@@ -2,7 +2,7 @@
 	name = Manuele Menozzi
 	email = manuele.menozzi@gmail.com
 [core]
-	excludesfile = /Users/manuele/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nano
 	autocrlf = input
 #	autocrlf = input
