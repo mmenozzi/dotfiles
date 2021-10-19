@@ -93,8 +93,8 @@ alias light='iterm2_profile "Solarized Light"'
 alias dark='iterm2_profile "Solarized Dark"'
 alias zshrc='open ~/.zshrc'
 alias sf='bin/console'
-alias sfstart='docker compose -f docker-compose.dev.yml up -d && symfony proxy:start && symfony serve -d'
-alias sfstop='docker-compose -f docker-compose.dev.yml stop && symfony proxy:stop && symfony server:stop'
+alias sfstart='f() {if [ -z "$1" ]; then dcup -d; else dcup -f $1 -d; fi && symfony proxy:start && symfony serve -d};f'
+alias sfstop='f() {if [ -z "$1" ]; then dcstop; else dcstop -f $1; fi && symfony proxy:stop && symfony server:stop};f'
 
 # Functions
 
