@@ -209,3 +209,7 @@ fi
 
 # Add default key to SSH agent
 ssh-add -kq
+
+# PHPBrew
+[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
+
