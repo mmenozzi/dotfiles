@@ -213,3 +213,5 @@ ssh-add -kq
 # PHPBrew
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
+# https://github.com/nvbn/thefuck
+eval $(thefuck --alias)
