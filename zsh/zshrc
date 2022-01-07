@@ -186,9 +186,6 @@ add-zsh-hook chpwd load-nvmrc
 # Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-# brew-php-switcher alias
-alias sphp="brew-php-switcher"
-
 # Too many open files fix
 ulimit -S -n 2048
 
