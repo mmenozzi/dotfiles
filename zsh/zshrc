@@ -102,6 +102,10 @@ magerun() {
     test -f vendor/bin/n98-magerun && vendor/bin/n98-magerun $@ || /usr/local/bin/n98-magerun.phar $@
 }
 
+magerun2() {
+    test -f vendor/bin/n98-magerun2 && vendor/bin/n98-magerun2 $@ || /usr/local/bin/n98-magerun2.phar $@
+}
+
 dep() {
     test -f vendor/bin/dep && vendor/bin/dep $@ || /usr/local/bin/dep6 $@
 }
