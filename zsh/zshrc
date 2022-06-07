@@ -216,3 +216,15 @@ ssh-add -kq
 
 # https://github.com/nvbn/thefuck
 eval $(thefuck --alias)
+
+# BEGIN SNIPPET: Magento Cloud CLI configuration
+HOME=${HOME:-'/Users/manuele'}
+export PATH="$HOME/"'.magento-cloud/bin':"$PATH"
+
+# Magento Cloud CLI
+if [ -f "$HOME/"'.magento-cloud/shell-config.rc' ]; then . "$HOME/"'.magento-cloud/shell-config.rc'; fi # END SNIPPET
+
+# BEGIN SNIPPET: Platform.sh CLI configuration
+HOME=${HOME:-'/Users/manuele'}
+export PATH="$HOME/"'.platformsh/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
